@@ -84,11 +84,12 @@ def pregunta_03():
                 letra.append(row[0])
             else:
                 contador[letra.index(row[0])]+=int(row[1])
-    for letra in letra:
-        suma.append((letra,contador[letra.index(letra)]))
+    for i in letra:
+        suma.append((i,contador[letra.index(i)]))
     suma.sort(reverse=False)
     return suma
 
+print(pregunta_03())
 
 def pregunta_04():
     """
