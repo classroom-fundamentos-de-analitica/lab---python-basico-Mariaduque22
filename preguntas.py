@@ -127,7 +127,6 @@ def pregunta_04():
         registros.append((i, columna.count(i)))
     return registros
 
-print(pregunta_04())
 
 def pregunta_05():
     """
@@ -144,8 +143,27 @@ def pregunta_05():
     ]
 
     """
-    return
-
+    val_maximo = []
+    val_minimo = []
+    letras=[]
+    maximos = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not row[0] in letras):
+                letras.append(row[0])
+                val_maximo.append(int(row[1]))
+                val_minimo.append(int(row[1]))
+            else:
+                if(val_maximo[letras.index(row[0])]<int(row[1])):
+                    val_maximo[letras.index(row[0])]=int(row[1])
+                if(val_minimo[letras.index(row[0])]>int(row[1])):
+                    val_minimo[letras.index(row[0])]=int(row[1])
+    for letra in letras:
+        maximos.append((letra,val_maximo[letras.index(letra)],val_minimo[letras.index(letra)]))
+    maximos.sort(reverse=False)
+    return maximos
+print(pregunta_05())
 
 def pregunta_06():
     """
