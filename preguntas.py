@@ -186,7 +186,29 @@ def pregunta_06():
     ]
 
     """
-    return
+    diccionario = []
+    letras=[]
+    val_maximo = []
+    val_minimo = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            for clave in row[4].split(','):
+                letra = clave.split(':')[0]
+                codigo = clave.split(':')[1]
+                if(not letra in letras):
+                    letras.append(letra)
+                    val_maximo.append(int(codigo))
+                    val_minimo.append(int(codigo))
+                else:
+                    if(val_maximo[letras.index(letra)]<int(codigo)):
+                        val_maximo[letras.index(letra)]=int(codigo)
+                    if(val_minimo[letras.index(letra)]>int(codigo)):
+                        val_minimo[letras.index(letra)]=int(codigo)
+    for i in letras:
+        diccionario.append((i,val_minimo[letras.index(i)],val_maximo[letras.index(i)]))
+    diccionario.sort(reverse=False)
+    return diccionario
 
 
 def pregunta_07():
@@ -303,8 +325,6 @@ def pregunta_10():
             columna_5 = len(columna_5)
             letras.append((row[0], columna_4, columna_5))
     return letras
-
-print(pregunta_10())
 
 def pregunta_11():
     """
