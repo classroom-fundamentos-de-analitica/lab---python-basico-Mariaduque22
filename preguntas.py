@@ -44,7 +44,7 @@ def pregunta_02():
     registros = []
     columna = []
     letra=[]
-    
+
     with open('data.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='	')
         for row in csv_reader:
@@ -73,7 +73,21 @@ def pregunta_03():
     ]
 
     """
-    return
+    contador = []
+    letra=[]
+    suma=[]
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not row[0] in letra):
+                contador.append(int(row[1]))
+                letra.append(row[0])
+            else:
+                contador[letra.index(row[0])]+=int(row[1])
+    for letra in letra:
+        suma.append((letra,contador[letra.index(letra)]))
+    suma.sort(reverse=False)
+    return suma
 
 
 def pregunta_04():
