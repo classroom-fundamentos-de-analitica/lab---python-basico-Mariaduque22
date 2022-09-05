@@ -387,7 +387,7 @@ def pregunta_11():
                     suma[letra] += int(row[1])
     diccionario = dict(sorted(suma.items()))
     return diccionario
-print(pregunta_11())
+
 
 def pregunta_12():
     """
@@ -404,4 +404,18 @@ def pregunta_12():
     }
 
     """
-    return
+    suma={}
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            letra=row[0]
+            for clave in row[4].split(","):
+                valor = int(clave.split(":")[1])
+                if(not letra in suma.keys()):
+                    suma.update({letra: valor})
+                else:
+                    suma[letra] += valor
+    diccionario = dict(sorted(suma.items()))
+    return diccionario
+
+print(pregunta_12())
