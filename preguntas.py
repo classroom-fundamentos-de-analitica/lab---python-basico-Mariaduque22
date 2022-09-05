@@ -11,7 +11,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
 
 def pregunta_01():
     """
@@ -21,6 +21,11 @@ def pregunta_01():
     214
 
     """
+    suma=0
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            suma+= int(row[1])
     return
 
 
