@@ -312,7 +312,21 @@ def pregunta_09():
     }
 
     """
-    return
+    dictionario = {}
+    columna = []
+    registros = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            for cod in row[4].split(','):
+                letra = cod.split(':')[0]
+                columna.append(letra)
+                if( not letra in registros):
+                    registros.append(letra)
+    registros.sort()
+    for i in registros:
+        dictionario.update({i: columna.count(i)})
+    return dictionario
 
 
 def pregunta_10():
@@ -362,8 +376,18 @@ def pregunta_11():
 
 
     """
-    return
-
+    suma={}
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            for letra in row[3].split(","):
+                if(not letra in suma.keys()):
+                    suma.update({letra: int(row[1])})
+                else:
+                    suma[letra] += int(row[1])
+    diccionario = dict(sorted(suma.items()))
+    return diccionario
+print(pregunta_11())
 
 def pregunta_12():
     """
