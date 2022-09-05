@@ -89,7 +89,6 @@ def pregunta_03():
     suma.sort(reverse=False)
     return suma
 
-print(pregunta_03())
 
 def pregunta_04():
     """
@@ -113,8 +112,22 @@ def pregunta_04():
     ]
 
     """
-    return
+    registros = []
+    mes=[]
+    columna = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            numero_mes = row[2].split("-")[1]
+            columna.append(numero_mes)
+            if(not numero_mes in mes):
+                mes.append(numero_mes)
+    mes.sort()
+    for i in mes:
+        registros.append((i, columna.count(i)))
+    return registros
 
+print(pregunta_04())
 
 def pregunta_05():
     """
