@@ -225,7 +225,7 @@ def pregunta_07():
         asociacion.append((i,letras[orden.index(i)]))
     asociacion.sort(reverse=False)
     return asociacion
-print(pregunta_07())
+
 
 def pregunta_08():
     """
@@ -293,8 +293,18 @@ def pregunta_10():
 
 
     """
-    return
+    letras=[]
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            columna_4 = row[3].split(",")
+            columna_4 = len(columna_4)
+            columna_5 = row[4].split(",")
+            columna_5 = len(columna_5)
+            letras.append((row[0], columna_4, columna_5))
+    return letras
 
+print(pregunta_10())
 
 def pregunta_11():
     """
