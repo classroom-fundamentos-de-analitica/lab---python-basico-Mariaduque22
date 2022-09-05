@@ -16,10 +16,7 @@ import csv
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
-    Rta/
-    214
-
+    Rta/214
     """
     suma=0
     with open('data.csv') as csv_file:
@@ -44,7 +41,21 @@ def pregunta_02():
     ]
 
     """
-    return
+    registros = []
+    columna = []
+    letra=[]
+    
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+                columna.append(row[0])
+                if(not row[0] in letra):
+                    letra.append(row[0])
+    letra.sort()
+    for i in letra:
+        registros.append((i, columna.count(i)))
+
+    return registros
 
 
 def pregunta_03():
