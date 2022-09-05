@@ -26,7 +26,7 @@ def pregunta_01():
         csv_reader = csv.reader(csv_file, delimiter='	')
         for row in csv_reader:
             suma+= int(row[1])
-    return
+    return suma
 
 
 def pregunta_02():
