@@ -418,4 +418,3 @@ def pregunta_12():
     diccionario = dict(sorted(suma.items()))
     return diccionario
 
-print(pregunta_12())
