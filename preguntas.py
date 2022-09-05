@@ -163,7 +163,6 @@ def pregunta_05():
         maximos.append((letra,val_maximo[letras.index(letra)],val_minimo[letras.index(letra)]))
     maximos.sort(reverse=False)
     return maximos
-print(pregunta_05())
 
 def pregunta_06():
     """
@@ -211,8 +210,22 @@ def pregunta_07():
     ]
 
     """
-    return
-
+    orden = []
+    letras = []
+    asociacion = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not int(row[1]) in orden):
+                letras.append([row[0]])
+                orden.append(int(row[1]))
+            else:
+                letras[orden.index(int(row[1]))].append(row[0])
+    for i in orden:
+        asociacion.append((i,letras[orden.index(i)]))
+    asociacion.sort(reverse=False)
+    return asociacion
+print(pregunta_07())
 
 def pregunta_08():
     """
