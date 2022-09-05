@@ -271,7 +271,25 @@ def pregunta_08():
     ]
 
     """
-    return
+    tupla = []
+    numero = []
+    letra = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not int(row[1]) in numero):
+                numero.append(int(row[1]))
+                letra.append([row[0]])
+            else:
+                if(not row[0] in letra[numero.index(int(row[1]))]):
+                    letra[numero.index(int(row[1]))].append(row[0])
+
+    for i in numero:
+        segunda = letra[numero.index(i)]
+        segunda.sort()
+        tupla.append((i,segunda))
+    tupla.sort(reverse=False)
+    return tupla
 
 
 def pregunta_09():
