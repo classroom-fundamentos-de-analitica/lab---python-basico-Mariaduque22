@@ -11,17 +11,19 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
-    Rta/
-    214
-
+    Rta/214
     """
-    return
+    suma=0
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            suma+= int(row[1])
+    return suma
 
 
 def pregunta_02():
@@ -39,7 +41,21 @@ def pregunta_02():
     ]
 
     """
-    return
+    registros = []
+    columna = []
+    letra=[]
+
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+                columna.append(row[0])
+                if(not row[0] in letra):
+                    letra.append(row[0])
+    letra.sort()
+    for i in letra:
+        registros.append((i, columna.count(i)))
+
+    return registros
 
 
 def pregunta_03():
@@ -57,7 +73,21 @@ def pregunta_03():
     ]
 
     """
-    return
+    contador = []
+    letra=[]
+    suma=[]
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not row[0] in letra):
+                contador.append(int(row[1]))
+                letra.append(row[0])
+            else:
+                contador[letra.index(row[0])]+=int(row[1])
+    for i in letra:
+        suma.append((i,contador[letra.index(i)]))
+    suma.sort(reverse=False)
+    return suma
 
 
 def pregunta_04():
@@ -82,7 +112,20 @@ def pregunta_04():
     ]
 
     """
-    return
+    registros = []
+    mes=[]
+    columna = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            numero_mes = row[2].split("-")[1]
+            columna.append(numero_mes)
+            if(not numero_mes in mes):
+                mes.append(numero_mes)
+    mes.sort()
+    for i in mes:
+        registros.append((i, columna.count(i)))
+    return registros
 
 
 def pregunta_05():
@@ -100,8 +143,26 @@ def pregunta_05():
     ]
 
     """
-    return
-
+    val_maximo = []
+    val_minimo = []
+    letras=[]
+    maximos = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not row[0] in letras):
+                letras.append(row[0])
+                val_maximo.append(int(row[1]))
+                val_minimo.append(int(row[1]))
+            else:
+                if(val_maximo[letras.index(row[0])]<int(row[1])):
+                    val_maximo[letras.index(row[0])]=int(row[1])
+                if(val_minimo[letras.index(row[0])]>int(row[1])):
+                    val_minimo[letras.index(row[0])]=int(row[1])
+    for letra in letras:
+        maximos.append((letra,val_maximo[letras.index(letra)],val_minimo[letras.index(letra)]))
+    maximos.sort(reverse=False)
+    return maximos
 
 def pregunta_06():
     """
@@ -125,7 +186,29 @@ def pregunta_06():
     ]
 
     """
-    return
+    diccionario = []
+    letras=[]
+    val_maximo = []
+    val_minimo = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            for clave in row[4].split(','):
+                letra = clave.split(':')[0]
+                codigo = clave.split(':')[1]
+                if(not letra in letras):
+                    letras.append(letra)
+                    val_maximo.append(int(codigo))
+                    val_minimo.append(int(codigo))
+                else:
+                    if(val_maximo[letras.index(letra)]<int(codigo)):
+                        val_maximo[letras.index(letra)]=int(codigo)
+                    if(val_minimo[letras.index(letra)]>int(codigo)):
+                        val_minimo[letras.index(letra)]=int(codigo)
+    for i in letras:
+        diccionario.append((i,val_minimo[letras.index(i)],val_maximo[letras.index(i)]))
+    diccionario.sort(reverse=False)
+    return diccionario
 
 
 def pregunta_07():
@@ -149,7 +232,21 @@ def pregunta_07():
     ]
 
     """
-    return
+    orden = []
+    letras = []
+    asociacion = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not int(row[1]) in orden):
+                letras.append([row[0]])
+                orden.append(int(row[1]))
+            else:
+                letras[orden.index(int(row[1]))].append(row[0])
+    for i in orden:
+        asociacion.append((i,letras[orden.index(i)]))
+    asociacion.sort(reverse=False)
+    return asociacion
 
 
 def pregunta_08():
@@ -174,7 +271,25 @@ def pregunta_08():
     ]
 
     """
-    return
+    tupla = []
+    numero = []
+    letra = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            if(not int(row[1]) in numero):
+                numero.append(int(row[1]))
+                letra.append([row[0]])
+            else:
+                if(not row[0] in letra[numero.index(int(row[1]))]):
+                    letra[numero.index(int(row[1]))].append(row[0])
+
+    for i in numero:
+        segunda = letra[numero.index(i)]
+        segunda.sort()
+        tupla.append((i,segunda))
+    tupla.sort(reverse=False)
+    return tupla
 
 
 def pregunta_09():
@@ -197,7 +312,21 @@ def pregunta_09():
     }
 
     """
-    return
+    dictionario = {}
+    columna = []
+    registros = []
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            for cod in row[4].split(','):
+                letra = cod.split(':')[0]
+                columna.append(letra)
+                if( not letra in registros):
+                    registros.append(letra)
+    registros.sort()
+    for i in registros:
+        dictionario.update({i: columna.count(i)})
+    return dictionario
 
 
 def pregunta_10():
@@ -218,8 +347,16 @@ def pregunta_10():
 
 
     """
-    return
-
+    letras=[]
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            columna_4 = row[3].split(",")
+            columna_4 = len(columna_4)
+            columna_5 = row[4].split(",")
+            columna_5 = len(columna_5)
+            letras.append((row[0], columna_4, columna_5))
+    return letras
 
 def pregunta_11():
     """
@@ -239,7 +376,17 @@ def pregunta_11():
 
 
     """
-    return
+    suma={}
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            for letra in row[3].split(","):
+                if(not letra in suma.keys()):
+                    suma.update({letra: int(row[1])})
+                else:
+                    suma[letra] += int(row[1])
+    diccionario = dict(sorted(suma.items()))
+    return diccionario
 
 
 def pregunta_12():
@@ -257,4 +404,17 @@ def pregunta_12():
     }
 
     """
-    return
+    suma={}
+    with open('data.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='	')
+        for row in csv_reader:
+            letra=row[0]
+            for clave in row[4].split(","):
+                valor = int(clave.split(":")[1])
+                if(not letra in suma.keys()):
+                    suma.update({letra: valor})
+                else:
+                    suma[letra] += valor
+    diccionario = dict(sorted(suma.items()))
+    return diccionario
+
